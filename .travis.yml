@@ -1,0 +1,22 @@
+language: python
+python:
+    - 2.7
+cache:  
+   directories:
+     - .autoconf
+     - $HOME/.m2
+     - build
+     - modules
+     - base
+    
+#before_install:
+   #- sudo apt-get install libblas-dev liblapack-dev libatlas-base-dev gfortran
+
+#install:
+#   - pip install -r requirements.txt
+
+script: 
+ - curl https://raw.githubusercontent.com/cctbx/cctbx_project/master/libtbx/auto_build/bootstrap.py > bootstrap.py
+ - travis_wait 60 python bootstrap.py --builder=qrefine #update build
+ - ls -ltr 
+ - source build/setpaths.sh
